@@ -33,12 +33,18 @@ exports.getProjectById = async (req, res) => {
 // Update a project by ID
  exports.updateProject = async (req, res) => {
     try {
+        // Validate project status if provided
+        if (req.body.projectStatus && !['Registered', 'Running', 'Closed', 'Cancelled'].includes(req.body.projectStatus)) {
+            return res.status(400).json({ error: 'Invalid project status' });
+        }
+
         const project = await projectService.updateProject(req.params.id, req.body);
         res.status(200).json(project);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 };
+
 
 // Delete a project by ID
 exports.deleteProject = async (req, res) => {

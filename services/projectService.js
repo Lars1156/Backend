@@ -34,8 +34,13 @@ exports.getProjectId  = async(projectId) =>{
     }
 }
 // Update a project by ID
-exports.updateProject = async (projectId, updateData) => {
+exports. updateProject = async (projectId, updateData) => {
     try {
+        // Ensure the status is valid
+        if (updateData.projectStatus && !['Registered', 'Running', 'Closed', 'Cancelled'].includes(updateData.projectStatus)) {
+            throw new Error('Invalid project status');
+        }
+
         const project = await Project.findByIdAndUpdate(projectId, updateData, { new: true });
         if (!project) {
             throw new Error('Project not found');
@@ -45,6 +50,7 @@ exports.updateProject = async (projectId, updateData) => {
         throw new Error('Error updating project: ' + error.message);
     }
 };
+
 
 // Delete a project by ID
  exports.deleteProject = async (projectId) => {
