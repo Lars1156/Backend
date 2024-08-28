@@ -9,7 +9,8 @@ router.post('/loginUser', userController.loginUser);
 
 router.post('/createProject', projectController.createProject);
 router.get('/getAllProject' , projectController.getAllProjects);
-router.
+router.put('/upadateProject/:id', projectController.updateProject);
+router.delete('/deleteProject/:id', projectController.deleteProject);
 
 module.exports = router;
 
