@@ -32,6 +32,8 @@ exports.getProjectById = async (req, res) => {
 
 // Update a project by ID
  exports.updateProject = async (req, res) => {
+    console.log("Runnging Project Status" , req.body);
+    
     try {
         // Validate project status if provided
         if (req.body.projectStatus && !['Registered', 'Running', 'Closed', 'Cancelled'].includes(req.body.projectStatus)) {
