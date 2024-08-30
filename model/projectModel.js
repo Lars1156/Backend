@@ -55,6 +55,7 @@ const projectSchema = new mongoose.Schema({
     },
     projectStatus: {
         type: String,
+        enum:['Registered', 'Running', 'Closed', 'Cancelled'],
         default: 'Registered'
     },
     location: {
